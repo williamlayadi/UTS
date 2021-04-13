@@ -1,53 +1,27 @@
-import { Component } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { Observable } from 'rxjs';
 import { FotoService } from '../services/foto.service';
+
 export interface fileFoto{
   name:string; //filepath
   path:string; //web
 }
+
 @Component({
-  selector: 'app-tab3',
-  templateUrl: 'tab3.page.html',
-  styleUrls: ['tab3.page.scss']
+  selector: 'app-tab4',
+  templateUrl: './tab4.page.html',
+  styleUrls: ['./tab4.page.scss'],
 })
-export class Tab3Page {
-
-  isiData : Observable<data[]>;
-
-  isiDataColl : AngularFirestoreCollection<data>;
-
-  Judul : string;
-  Isi : string;
-  Tanggal:string;
-  Nilai :string;
-  constructor(
-    afs : AngularFirestore,
-    private afStorage:AngularFireStorage,
-    public fotoService : FotoService,
-  ) {
-    this.isiDataColl = afs.collection('dataCoba');
-    this.isiData = this.isiDataColl.valueChanges();
-   }
-   simpan(){
-     this.isiDataColl.doc(this.Judul).set({
-       judul : this.Judul,
-       isi : this.Isi,
-       tanggal:this.Tanggal,
-       nilai : this.Nilai
-     })
-   }
-   hapus(event){
-    this.isiDataColl.doc(event).delete()
- }
-
- edit(){
-
- }
+export class Tab4Page implements OnInit {
 
   urlImageStorage : string[] = [];
+  constructor(
+    private afStorage:AngularFireStorage,
+    public fotoService : FotoService
 
+  ) {
+
+   }
 
   async ngOnInit() {
     await this.fotoService.loadFoto();
@@ -101,11 +75,4 @@ async ionViewDidEnter(){
       });
     }
   }
-
-}
-interface data{
-  judul:string,
-  isi:string,
-  tanggal:string,
-  nilai:string
 }

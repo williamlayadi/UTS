@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Upload Note</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Notes</ion-card-title>
+    </ion-card-header>
+
+    <ion-item>
+      <ion-input placeholder="Judul" [(ngModel)]="Judul"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input placeholder="Isi Note" [(ngModel)]="Isi"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="date" placeholder="Tanggal" [(ngModel)]="Tanggal"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input placeholder="Nilai Notes" [(ngModel)]="Nilai"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-button (click)="simpan()">SIMPAN</ion-button>
+    </ion-item>
+  </ion-card>
+
+
+
+
+
+
+  <ion-list>
+    <ion-item *ngFor="let data of isiData | async">
+      <ion-col>
+        <h1>{{data.judul}}</h1>
+        <p>{{data.isi}}</p>
+        <p>{{data.tanggal}}</p>
+        <p>{{data.nilai}}</p>
+      </ion-col>
+      <ion-col>
+        <ion-button  color="warning" (click)="edit(data.judul)"><ion-icon name="create-outline"></ion-icon></ion-button>
+        <ion-button  color="danger" (click)="hapus(data.judul)"><ion-icon name="trash-outline"></ion-icon></ion-button>
+      </ion-col>
+
+    </ion-item>
+
+  </ion-list>
+
+
+
+</ion-content>
